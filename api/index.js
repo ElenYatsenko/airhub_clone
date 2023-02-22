@@ -44,7 +44,6 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   const userDoc = await User.findOne({ email });
-  console.log(userDoc);
   if (userDoc) {
     const passOk = bcrypt.compareSync(password, userDoc.password);
     if (passOk) {
@@ -81,5 +80,7 @@ app.get("/profile", (req, res) => {
 app.post("/logout", (req, res) => {
   res.cookie("token", "").json(true);
 });
+
+
 
 app.listen(4000);
