@@ -1,0 +1,123 @@
+import { useState } from "react";
+import PhotosUploader from "../PhotosUploader";
+import Perks from "../Perks";
+import axios from "axios";
+import AccountNav from "../AccountNav";
+import { Navigate } from "react-router-dom";
+
+const PlacesFormPage = () => {
+  const [title, setTitle] = useState("");
+  const [address, setAddress] = useState("");
+  const [addedPhotos, setAddedPhotos] = useState([]);
+  const [description, setDescription] = useState("");
+  const [perks, setPerks] = useState([]);
+  const [extraInfo, setExtraInfo] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [maxGuests, setMaxGuests] = useState(1);
+  const [redirect, setRedirect] = useState(false);
+
+  const addNewPlace = async (ev) => {
+    ev.preventDefault();
+    const { data } = axios.post("/places", {
+      title,
+      address,
+      addedPhotos,
+      description,
+      perks,
+      extraInfo,
+      checkIn,
+      checkOut,
+      maxGuests,
+    });
+    setRedirect(true);
+  };
+
+  if (redirect) {
+    return <Navigate to={"/account/places"} />;
+  }
+
+  return (
+    <div>
+      <AccountNav />
+      <form onSubmit={addNewPlace}>
+        <h2 className="text-2xl mt-4">Title</h2>
+        <p className="text-gray-500 text-sm">
+          Title for your place. should be short and catchy as in advertisment
+        </p>
+        <input
+          type="text"
+          value={title}
+          onChange={(ev) => setTitle(ev.target.value)}
+          placeholder="title,for example: My lovely apt"
+        ></input>
+        <h2 className="text-2xl mt-4">Address</h2>
+        <p className="text-gray-500 text-sm">Address to this place </p>
+        <input
+          type="text"
+          value={address}
+          onChange={(ev) => setAddress(ev.target.value)}
+          placeholder="address"
+        ></input>
+        <h2 className="text-2xl mt-4">Photos</h2>
+        <p className="text-gray-500 text-sm">more = better </p>
+        <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos} />
+        <h2 className="text-2xl mt-4">Description</h2>
+        <p className="text-gray-500 text-sm">description of the place</p>
+        <textarea
+          value={description}
+          onChange={(ev) => setDescription(ev.target.value)}
+        />
+        <h2 className="text-2xl mt-4">Perks</h2>
+        <p className="text-gray-500 text-sm">
+          select all the perks of your place
+        </p>
+        <div className="grid mt-2 gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          <Perks selected={perks} onChange={setPerks} />
+        </div>
+        <h2 className="text-2xl mt-4">Extra info</h2>
+        <p className="text-gray-500 text-sm">house rules, etc</p>
+        <textarea
+          value={extraInfo}
+          onChange={(ev) => setExtraInfo(ev.target.value)}
+        />
+        <h2 className="text-2xl mt-4">Check in&out times</h2>
+        <p className="text-gray-500 text-sm">
+          add check in and out times, remember to have some time window for
+          cleaning the room between guests
+        </p>
+        <div className="grid gap-2 sm:grid-cols-3">
+          <div>
+            <h3 className="mt-2 -mb-1">Check in time</h3>
+            <input
+              type="text"
+              placeholder="14"
+              value={checkIn}
+              onChange={(ev) => setCheckIn(ev.target.value)}
+            />
+          </div>
+          <div>
+            <h3 className="mt-2 -mb-1">Check out time</h3>
+            <input
+              type="text"
+              placeholder="11"
+              value={checkOut}
+              onChange={(ev) => setCheckOut(ev.target.value)}
+            />
+          </div>
+          <div>
+            <h3 className="mt-2 -mb-1">Max number of guests</h3>
+            <input
+              type="number"
+              value={maxGuests}
+              onChange={(ev) => setMaxGuests(ev.target.value)}
+            />
+          </div>
+        </div>
+        <button className="primary my-4">Save</button>
+      </form>
+    </div>
+  );
+};
+
+export default PlacesFormPage;
