@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
-import App from "../App";
 import { UserContext } from "../UserContext";
 
 const LoginPage = () => {
@@ -13,7 +12,7 @@ const LoginPage = () => {
   const hangleLoginSubmit = async (ev) => {
     ev.preventDefault();
     try {
-      const data = await axios.post("/login", { email, password });
+      const { data } = await axios.post("/login", { email, password });
       setUser(data);
       alert("Login successful");
       setRedirect(true);
