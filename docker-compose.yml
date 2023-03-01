@@ -1,0 +1,20 @@
+version: "3"
+services:
+  mongo_db:
+    container_name: db_container
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  api:
+    build: .
+    ports:
+      - 4000:4000
+    environment:
+      - MONGO_URL:mongodb+srv://booking:kIRkcYk1Kxi4Czfc@cluster0.m8eqdoa.mongodb.net/?retryWrites=true&w=majority
+    depends_on: 
+      - mongo_db
+
+volumes:
+  mongo_db: {}
