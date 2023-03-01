@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import { UserContextProvider } from "./UserContext";
 
-import Layout from "./Layout";
+import Layout from "./components/Layout";
 import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import PhotosUploader from "../PhotosUploader";
-import Perks from "../Perks";
-import axios from "axios";
-import AccountNav from "../AccountNav";
 import { Navigate, useParams } from "react-router-dom";
+import PhotosUploader from "../components/PhotosUploader";
+import Perks from "../components/Perks";
+import AccountNav from "../components/AccountNav";
+import axios from "axios";
 
 const PlacesFormPage = () => {
   const { id } = useParams();
@@ -50,7 +50,7 @@ const PlacesFormPage = () => {
       checkIn,
       checkOut,
       maxGuests,
-      price
+      price,
     };
 
     if (id) {

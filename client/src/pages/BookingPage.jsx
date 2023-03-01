@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import AddressLink from "../AddressLink";
-import PlaceGallery from "../PlaceGallery";
-import BookingDates from "../BookingDates";
+import AddressLink from "../components/AddressLink";
+import PlaceGallery from "../components/PlaceGallery";
+import BookingDates from "../components/BookingDates";
+import PlaceGallerySlider from "../components/PlaceGallerySlider";
 
 const BookingPage = () => {
   const { id } = useParams();
@@ -38,7 +39,7 @@ const BookingPage = () => {
           <div className="text-3xl">${booking.price}</div>
         </div>
       </div>
-      <PlaceGallery place={booking.place} />
+      <PlaceGallerySlider place={booking.place} />
     </div>
   );
 };
