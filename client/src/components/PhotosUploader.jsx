@@ -54,7 +54,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
         ></input>
         <button
           onClick={addPhotoByLink}
-          className="bg-gray-200 px-4 rounded-2xl"
+          className="bg-gray-200 px-4 rounded-2xl text-black"
         >
           Add&nbsp;photo
         </button>

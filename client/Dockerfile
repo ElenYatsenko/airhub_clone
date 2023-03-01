@@ -10,4 +10,7 @@ RUN npm install
 
 COPY . ./
 
+RUN chown -R node:node /app/node_modules
+RUN chmod -R 777  /app/node_modules
+
 CMD ["npm","run","dev"]
